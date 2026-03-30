@@ -1,0 +1,44 @@
+services:
+  # ── Backend (FastAPI + ML models) ──────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: spatx-backend
+    ports:
+      - "9001:9001"          # Exposed for direct API access / debugging
+    volumes:
+      - db-data:/app/data                           # SQLite database
+      - upload-data:/app/uploads                    # User-uploaded images & CSVs
+      - session-data:/app/pratyaksha_sessions       # Pratyaksha session files
+      - ./backend/src/pratyaksha_data:/app/pratyaksha_data    # Spatial .h5 data
+      - ./backend/src/pratyaksha_tiles:/app/pratyaksha_tiles  # DZI tiles
+      - ./backend/src/saved_models:/app/saved_models          # ML model .pth files
+    environment:
+      - DATABASE_URL=sqlite:///./data/spatx.db
+      - UVICORN_WORKERS=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9001/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s      # Backend takes time to import torch etc.
+
+  # ── Frontend (nginx reverse-proxy + SPA) ───────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: spatx-frontend
+    ports:
+      - "8080:8080"          # Main user-facing port
+    depends_on:
+      backend:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  db-data:
+  upload-data:
+  session-data:

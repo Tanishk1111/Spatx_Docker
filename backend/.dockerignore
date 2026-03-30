@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+.git/
+.gitignore
+*.md
+*.lock
+.python-version
+src/spatx_core/tests/
+src/uploads/*
+src/pratyaksha_sessions/*
+src/training_data/*
+src/user_models/*
+src/data/*
