@@ -34,7 +34,7 @@ COPY src/ /app/
 # ── Database initialiser + entrypoint ────────────────────────
 COPY init_db.py /app/init_db.py
 COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+RUN sed -i 's/\r$//' /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 
 # ── Runtime directories ──────────────────────────────────────
 RUN mkdir -p /app/data /app/uploads /app/pratyaksha_data \
