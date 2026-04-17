@@ -244,7 +244,7 @@ class DGERequest(BaseModel):
 
 class GOEnrichmentRequest(BaseModel):
     gene_list: List[str]
-    organism: str = "Human"
+    organism: str = "human"
     ontology_types: List[str] = [
         "GO_Biological_Process_2021",
         "GO_Molecular_Function_2021",
@@ -1070,7 +1070,7 @@ def go_enrichment(request: GOEnrichmentRequest):
                 enr = gp.enrichr(
                     gene_list=gene_list_clean,
                     gene_sets=[gene_set],
-                    organism=request.organism,
+                    organism=request.organism.lower(),
                     outdir=None,
                     cutoff=request.pvalue_threshold,
                     no_plot=True
