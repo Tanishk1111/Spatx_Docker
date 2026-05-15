@@ -250,6 +250,172 @@
       .toast.info {
         background: #3b82f6;
       }
+
+      /* ── Case-Study / Info-Tooltip styles (added 2026-05) ───────── */
+      .cs-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #6b7280;
+        background: #f9fafb;
+        border: 1px dashed #d1d5db;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+      }
+      .cs-link:hover {
+        background: #f3f4f6;
+        color: #4b5563;
+        border-color: #9ca3af;
+      }
+      .cs-info-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        margin-left: 8px;
+        font-size: 11px;
+        color: white;
+        background: rgba(255, 255, 255, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .cs-info-btn:hover {
+        background: rgba(255, 255, 255, 0.45);
+        transform: scale(1.1);
+      }
+      .cs-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(4px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 20px;
+        animation: cs-fade 0.2s ease-out;
+      }
+      .cs-modal-backdrop.show {
+        display: flex;
+      }
+      @keyframes cs-fade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      .cs-modal {
+        background: white;
+        border-radius: 16px;
+        max-width: 720px;
+        width: 100%;
+        max-height: 88vh;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        animation: cs-slide 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      @keyframes cs-slide {
+        from { opacity: 0; transform: translateY(20px) scale(0.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .cs-modal-header {
+        padding: 20px 24px;
+        background: linear-gradient(135deg, #8b5cf6, #6366f1);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+      .cs-modal-header h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .cs-modal-header .cs-eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        opacity: 0.85;
+        margin-bottom: 4px;
+      }
+      .cs-modal-close {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.15s;
+      }
+      .cs-modal-close:hover { background: rgba(255, 255, 255, 0.35); }
+      .cs-modal-body {
+        padding: 22px 24px;
+        overflow-y: auto;
+        color: #1f2937;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .cs-modal-body h4 {
+        margin: 18px 0 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #6366f1;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .cs-modal-body h4:first-child { margin-top: 0; }
+      .cs-modal-body p { margin: 0 0 10px; color: #374151; }
+      .cs-modal-body ul, .cs-modal-body ol {
+        margin: 4px 0 10px;
+        padding-left: 22px;
+      }
+      .cs-modal-body li { margin-bottom: 4px; color: #374151; }
+      .cs-modal-body code {
+        background: #f3f4f6;
+        color: #6366f1;
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-size: 12.5px;
+        font-family: 'Courier New', monospace;
+      }
+      .cs-modal-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 8px 0 12px;
+        font-size: 13px;
+      }
+      .cs-modal-body th, .cs-modal-body td {
+        text-align: left;
+        padding: 6px 10px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .cs-modal-body th {
+        background: #f9fafb;
+        font-weight: 600;
+        color: #374151;
+      }
+      .cs-disclaimer {
+        margin-top: 16px;
+        padding: 10px 12px;
+        background: #fef3c7;
+        border-left: 3px solid #f59e0b;
+        border-radius: 6px;
+        font-size: 12px;
+        color: #92400e;
+      }
     </style>
   </head>
 
@@ -638,6 +804,14 @@
                       <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </span>
                   </button>
+
+                  <!-- Case Study Link -->
+                  <div class="text-center mt-3" onclick="event.stopPropagation();">
+                    <a class="cs-link" onclick="event.stopPropagation(); openCaseStudy('training');">
+                      <i class="fas fa-book-open"></i>
+                      See example case study
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -708,6 +882,14 @@
                       <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </span>
                   </button>
+
+                  <!-- Case Study Link -->
+                  <div class="text-center mt-3" onclick="event.stopPropagation();">
+                    <a class="cs-link" onclick="event.stopPropagation(); openCaseStudy('prediction');">
+                      <i class="fas fa-book-open"></i>
+                      See example case study
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -775,6 +957,14 @@
                       <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </span>
                   </button>
+
+                  <!-- Case Study Link -->
+                  <div class="text-center mt-3" onclick="event.stopPropagation();">
+                    <a class="cs-link" onclick="event.stopPropagation(); openCaseStudy('pratyaksha');">
+                      <i class="fas fa-book-open"></i>
+                      See example case study
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2190,6 +2380,7 @@
                 <span style="color: white; font-size: 13px; font-weight: 600;">
                   <i class="fas fa-balance-scale mr-2"></i>Differential Gene Expression
                   <span style="font-size: 10px; font-weight: normal; opacity: 0.8; margin-left: 6px;">(RC Normalized)</span>
+                  <span class="cs-info-btn" title="See example case study" onclick="event.stopPropagation(); openCaseStudy('dge');"><i class="fas fa-info"></i></span>
                 </span>
                 <i class="fas fa-chevron-down accordion-arrow" id="dge-panel-arrow" style="color: white; transition: transform 0.3s;"></i>
               </div>
@@ -2216,6 +2407,7 @@
               <div onclick="toggleAccordion('go-panel')" style="padding: 12px 14px; background: linear-gradient(135deg, #06b6d4, #0891b2); cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
                 <span style="color: white; font-size: 13px; font-weight: 600;">
                   <i class="fas fa-project-diagram mr-2"></i>GO Enrichment
+                  <span class="cs-info-btn" title="See example case study" onclick="event.stopPropagation(); openCaseStudy('go');"><i class="fas fa-info"></i></span>
                 </span>
                 <i class="fas fa-chevron-down accordion-arrow" id="go-panel-arrow" style="color: white; transition: transform 0.3s;"></i>
               </div>
@@ -2236,6 +2428,7 @@
               <div onclick="toggleAccordion('gsva-panel')" style="padding: 12px 14px; background: linear-gradient(135deg, #f59e0b, #d97706); cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
                 <span style="color: white; font-size: 13px; font-weight: 600;">
                   <i class="fas fa-fire mr-2"></i>Gene Set Variation
+                  <span class="cs-info-btn" title="See example case study" onclick="event.stopPropagation(); openCaseStudy('gsva');"><i class="fas fa-info"></i></span>
                 </span>
                 <i class="fas fa-chevron-down accordion-arrow" id="gsva-panel-arrow" style="color: white; transition: transform 0.3s;"></i>
               </div>
@@ -5708,6 +5901,273 @@ No results yet. Expand an analysis section above to get started.
       window.downloadPratyakshaCSV = downloadPratyakshaCSV;
       window.exportPratyakshaSession = exportPratyakshaSession;
       window.importPratyakshaSession = importPratyakshaSession;
+    </script>
+
+    <!-- ────────────────────────────────────────────────────────────
+         Case Study / Example Run modals (added 2026-05)
+         Pure HTML + JS. No backend calls. Pop-up only.
+         ──────────────────────────────────────────────────────────── -->
+    <div id="cs-modal-backdrop" class="cs-modal-backdrop" onclick="if(event.target===this)closeCaseStudy()">
+      <div class="cs-modal" role="dialog" aria-modal="true" aria-labelledby="cs-modal-title">
+        <div class="cs-modal-header">
+          <div>
+            <div class="cs-eyebrow">Example Case Study</div>
+            <h3 id="cs-modal-title">Title</h3>
+          </div>
+          <button class="cs-modal-close" onclick="closeCaseStudy()" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="cs-modal-body" id="cs-modal-body">Body</div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const DISCLAIMER =
+          '<div class="cs-disclaimer">' +
+          '<i class="fas fa-info-circle mr-1"></i>' +
+          'All values shown here are illustrative dummy data for demonstration only.' +
+          '</div>';
+
+        const CASE_STUDIES = {
+          // ─────────────────────────────── Phase 1
+          training: {
+            title: "Fine-Tuning on Lung Adenocarcinoma (5-gene panel)",
+            body: `
+              <h4>Goal</h4>
+              <p>Train a custom predictor for 5 lung-cancer-relevant genes on a single Visium slide, then reuse the model for predictions on new slides.</p>
+
+              <h4>Example Inputs</h4>
+              <ul>
+                <li><code>lung_adenoca_HE.tif</code> &mdash; 4096 &times; 4096 H&amp;E tissue image</li>
+                <li><code>lung_5gene_train.csv</code> &mdash; 1,240 rows with columns
+                  <code>x</code>, <code>y</code>, <code>EGFR</code>, <code>KRAS</code>, <code>TP53</code>, <code>MKI67</code>, <code>VEGFA</code> (TPM-normalised)</li>
+              </ul>
+
+              <h4>Suggested Parameters</h4>
+              <table>
+                <tr><th>Parameter</th><th>Value</th><th>Rationale</th></tr>
+                <tr><td>Epochs</td><td>30</td><td>Plateau usually reached by epoch ~25</td></tr>
+                <tr><td>Learning rate</td><td>1e-4</td><td>Stable for fine-tuning the regression head</td></tr>
+                <tr><td>Batch size</td><td>8</td><td>Fits comfortably on CPU</td></tr>
+                <tr><td>Validation split</td><td>0.2</td><td>~248 spots held out</td></tr>
+              </table>
+
+              <h4>Expected Workflow</h4>
+              <ol>
+                <li>Upload the image + CSV pair</li>
+                <li>Pick the 5 target genes from the CSV columns</li>
+                <li>Set the parameters above and click <strong>Start Training</strong></li>
+                <li>Watch the live progress bar &mdash; loss curve, R&sup2;, ETA all update every few seconds</li>
+              </ol>
+
+              <h4>Expected Output</h4>
+              <ul>
+                <li>Training loss drops from <code>~0.84 &rarr; 0.21</code> across 30 epochs</li>
+                <li>Validation R&sup2; reaches <code>~0.74</code> by epoch 25</li>
+                <li>A new model <code>lung_5gene_v1.pth</code> appears in the prediction dropdown</li>
+                <li>Total runtime: <strong>~10 min on CPU</strong>, <strong>~90 s on GPU</strong></li>
+              </ul>
+              ${DISCLAIMER}
+            `,
+          },
+
+          // ─────────────────────────────── Phase 2
+          prediction: {
+            title: "Predicting Breast-Cancer Markers on a New Biopsy",
+            body: `
+              <h4>Goal</h4>
+              <p>Generate spatial expression maps for 6 clinically-relevant breast-cancer markers on a fresh H&amp;E slide &mdash; no expression data required, only the image.</p>
+
+              <h4>Example Inputs</h4>
+              <ul>
+                <li><code>biopsy_BRCA_042.tiff</code> &mdash; 5500 &times; 4200 H&amp;E slide</li>
+              </ul>
+
+              <h4>Suggested Settings</h4>
+              <table>
+                <tr><th>Setting</th><th>Value</th></tr>
+                <tr><td>Model</td><td><code>breast_cancer_50gene_v1</code> (bundled)</td></tr>
+                <tr><td>Prediction density</td><td>Medium (~1,600 grid points)</td></tr>
+                <tr><td>Selected genes</td><td>ESR1, ERBB2, MKI67, KRT19, FOXA1, GATA3</td></tr>
+              </table>
+
+              <h4>Expected Workflow</h4>
+              <ol>
+                <li>Upload the tissue image on the Prediction page</li>
+                <li>Pick the bundled 50-gene model</li>
+                <li>Choose <strong>Medium</strong> density for a good speed/coverage balance</li>
+                <li>Select the 6 genes above and click <strong>Predict</strong></li>
+              </ol>
+
+              <h4>Expected Output</h4>
+              <ul>
+                <li>6 &times; <strong>heatmap</strong> PNGs &mdash; raw predicted expression intensity</li>
+                <li>6 &times; <strong>overlay</strong> PNGs &mdash; heatmap fused with the H&amp;E image</li>
+                <li>6 &times; <strong>contour</strong> PNGs &mdash; iso-expression contour lines</li>
+                <li>Per-gene stats card, e.g. <code>ERBB2 &rarr; mean = 4.21, hotspot at (3220, 1840)</code></li>
+                <li>Biologically expected co-localisation: ESR1 / FOXA1 / GATA3 over luminal regions; MKI67 over proliferative zones</li>
+              </ul>
+              <p><em>Runtime:</em> ~2 min per 1,000 grid points on CPU.</p>
+              ${DISCLAIMER}
+            `,
+          },
+
+          // ─────────────────────────────── Phase 3 overview
+          pratyaksha: {
+            title: "Exploring Tumor Heterogeneity in a Visium Dataset",
+            body: `
+              <h4>Goal</h4>
+              <p>Map tumour-stroma heterogeneity and identify hypoxic regions in a breast-cancer Visium slide using ROI-based analyses.</p>
+
+              <h4>Example Inputs</h4>
+              <ul>
+                <li><code>tissue_hires_image.png</code> &mdash; Visium tissue image</li>
+                <li><code>tissue_positions_list.csv</code> &mdash; 3,893 spots with columns
+                  <code>barcode</code>, <code>in_tissue</code>, <code>array_row</code>, <code>array_col</code>, <code>pxl_row</code>, <code>pxl_col</code></li>
+                <li><code>filtered_feature_bc_matrix.h5</code> &mdash; gene&times;spot expression matrix (~18,000 genes)</li>
+              </ul>
+
+              <h4>Expected Workflow</h4>
+              <ol>
+                <li>Upload all three files &mdash; the tissue loads in the deep-zoom viewer (powered by OpenSeadragon)</li>
+                <li>Draw 2 polygon ROIs: one over dark-pink <strong>Tumor_core</strong> regions, another over surrounding <strong>Adjacent_stroma</strong></li>
+                <li>Click <strong>Run Differential Expression</strong> to compare the two ROIs</li>
+                <li>Use those top genes as input for <strong>GO Enrichment</strong></li>
+                <li>Run <strong>GSVA</strong> with Hypoxia + EMT + Angiogenesis to overlay pathway scores</li>
+                <li>Export results as JSON / CSV, or save the full session for later</li>
+              </ol>
+
+              <h4>What You'll Discover</h4>
+              <ul>
+                <li>Distinct tumour vs. stroma gene signatures</li>
+                <li>Enriched cell-cycle / DNA-replication pathways in the tumour signature</li>
+                <li>A hypoxia gradient peaking in the necrotic core</li>
+                <li>Angiogenesis activity highest at the tumour-stromal interface</li>
+              </ul>
+
+              <p style="margin-top:12px;">For a deeper dive into each analysis, click the <i class="fas fa-info-circle" style="color:#6366f1;"></i> icon next to each panel inside the viewer.</p>
+              ${DISCLAIMER}
+            `,
+          },
+
+          // ─────────────────────────────── DGE
+          dge: {
+            title: "DGE &mdash; Tumor Core vs. Stroma",
+            body: `
+              <h4>What this does</h4>
+              <p>Runs a Wilcoxon rank-sum test (with Benjamini-Hochberg FDR correction) to find genes whose expression differs between two ROI groups, or one group vs. all remaining spots.</p>
+
+              <h4>Example Setup</h4>
+              <ul>
+                <li><strong>Group 1 (Tumor):</strong> 188 spots inside polygon <code>Tumor_core</code></li>
+                <li><strong>Group 2 (Stroma):</strong> 242 spots inside polygon <code>Adjacent_stroma</code></li>
+                <li>Test: Wilcoxon rank-sum &mdash; Read-Count normalised expression</li>
+              </ul>
+
+              <h4>Example Output</h4>
+              <table>
+                <tr><th>Gene</th><th>log&#8322;FC</th><th>p<sub>adj</sub></th><th>Up in</th></tr>
+                <tr><td><code>KRT8</code></td><td>+2.41</td><td>1.2e-18</td><td>Tumor</td></tr>
+                <tr><td><code>ERBB2</code></td><td>+2.05</td><td>4.7e-15</td><td>Tumor</td></tr>
+                <tr><td><code>MKI67</code></td><td>+1.92</td><td>3.1e-12</td><td>Tumor</td></tr>
+                <tr><td><code>FOXA1</code></td><td>+1.71</td><td>9.5e-11</td><td>Tumor</td></tr>
+                <tr><td><code>COL1A1</code></td><td>-2.18</td><td>6.0e-16</td><td>Stroma</td></tr>
+                <tr><td><code>FAP</code></td><td>-1.88</td><td>2.3e-12</td><td>Stroma</td></tr>
+                <tr><td><code>ACTA2</code></td><td>-1.66</td><td>8.7e-10</td><td>Stroma</td></tr>
+              </table>
+
+              <h4>Tip</h4>
+              <p>If you've drawn only one ROI, tick <strong>"Compare Group 1 vs All Spots"</strong> for a one-vs-rest comparison &mdash; useful for screening a single region against the global background.</p>
+              ${DISCLAIMER}
+            `,
+          },
+
+          // ─────────────────────────────── GO
+          go: {
+            title: "GO Enrichment &mdash; Pathways in the Tumor Signature",
+            body: `
+              <h4>What this does</h4>
+              <p>Sends the top up-regulated genes from your most recent DGE run to the <strong>Enrichr</strong> API and ranks Gene-Ontology Biological-Process terms by combined score.</p>
+
+              <h4>Example Input</h4>
+              <ul>
+                <li>Top 50 up-regulated genes from the prior DGE run: <code>KRT8</code>, <code>ERBB2</code>, <code>MKI67</code>, <code>FOXA1</code>, <code>GATA3</code>, <code>ESR1</code>, <code>KRT19</code>, ...</li>
+                <li>Library: <code>GO_Biological_Process_2021</code></li>
+              </ul>
+
+              <h4>Example Output (top terms by combined score)</h4>
+              <table>
+                <tr><th>GO Term</th><th>p-value</th><th>Combined Score</th></tr>
+                <tr><td>Mitotic cell cycle (GO:0000278)</td><td>2.0e-12</td><td>412.1</td></tr>
+                <tr><td>DNA replication (GO:0006260)</td><td>8.5e-10</td><td>287.4</td></tr>
+                <tr><td>Epithelial cell differentiation (GO:0030855)</td><td>1.4e-8</td><td>198.2</td></tr>
+                <tr><td>Cell-cell adhesion (GO:0098609)</td><td>5.6e-7</td><td>142.7</td></tr>
+                <tr><td>Mammary gland development (GO:0030879)</td><td>2.1e-6</td><td>98.4</td></tr>
+              </table>
+
+              <p>A bar chart of the top 10 terms is rendered automatically via Chart.js.</p>
+              ${DISCLAIMER}
+            `,
+          },
+
+          // ─────────────────────────────── GSVA
+          gsva: {
+            title: "GSVA &mdash; Hypoxia and Angiogenesis Gradients",
+            body: `
+              <h4>What this does</h4>
+              <p>Scores every spot for activity in a curated gene set (built-in Hypoxia, EMT, Angiogenesis signatures) and lets you overlay the score on the tissue map.</p>
+
+              <h4>Example Setup</h4>
+              <ul>
+                <li>Gene sets ticked: <strong>Hypoxia</strong>, <strong>EMT</strong>, <strong>Angiogenesis</strong></li>
+                <li>Run on all in-tissue spots &mdash; no ROI required</li>
+                <li>Built-in gene panels:
+                  <ul>
+                    <li><strong>Hypoxia</strong> &mdash; <code>HIF1A</code>, <code>VEGFA</code>, <code>CA9</code>, <code>LDHA</code>, <code>SLC2A1</code>, ...</li>
+                    <li><strong>EMT</strong> &mdash; <code>VIM</code>, <code>FN1</code>, <code>CDH2</code>, <code>SNAI1</code>, <code>ZEB1</code>, ...</li>
+                    <li><strong>Angiogenesis</strong> &mdash; <code>PECAM1</code>, <code>ANGPT2</code>, <code>FLT1</code>, <code>KDR</code>, <code>TEK</code>, ...</li>
+                  </ul>
+                </li>
+              </ul>
+
+              <h4>Example Output &mdash; Typical Interpretation</h4>
+              <ul>
+                <li><strong>Hypoxia</strong> scores peak in necrotic tumour cores far from blood vessels</li>
+                <li><strong>Angiogenesis</strong> highest at the tumour-stromal interface &mdash; active neovascularisation</li>
+                <li><strong>EMT</strong> elevated at the invasive tumour front</li>
+              </ul>
+              <p>After the run, pick a pathway from the <strong>"Overlay on map"</strong> dropdown to recolour each spot by its score (red = high, blue = low).</p>
+              ${DISCLAIMER}
+            `,
+          },
+        };
+
+        function openCaseStudy(key) {
+          const cs = CASE_STUDIES[key];
+          if (!cs) {
+            console.warn("Unknown case study key:", key);
+            return;
+          }
+          document.getElementById("cs-modal-title").innerHTML = cs.title;
+          document.getElementById("cs-modal-body").innerHTML = cs.body;
+          document.getElementById("cs-modal-backdrop").classList.add("show");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeCaseStudy() {
+          document.getElementById("cs-modal-backdrop").classList.remove("show");
+          document.body.style.overflow = "";
+        }
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeCaseStudy();
+        });
+
+        window.openCaseStudy = openCaseStudy;
+        window.closeCaseStudy = closeCaseStudy;
+      })();
     </script>
   </body>
 </html>
